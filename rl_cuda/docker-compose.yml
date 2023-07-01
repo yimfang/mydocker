@@ -8,8 +8,8 @@ services:
         source: codevolume
         target: /root/myCodeLab
       - type: bind
-        source: ./container
-        target: /root
+        source: ./host
+        target: /root/myCodeLab/host
     deploy:
       resources:
         reservations:
@@ -17,6 +17,7 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+    tty: true
 
   mongodb:
     image: mongo:latest
