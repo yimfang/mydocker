@@ -40,8 +40,8 @@ ENV PATH /root/mambaforge/bin:$PATH
 RUN emacs --daemon && emacsclient -e '(kill-emacs)'
 
 # Python Env Commands: ray + pytorch1.13
+RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia && pip install tensorboard"
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && pip install 'ray[all]'"
-RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y pytorch=1.13 torchvision=0.14 torchaudio=0.13 torchtext=0.14 -c pytorch && pip install tensorboard"
 
 # # Setting Properties
 # Configure Git
