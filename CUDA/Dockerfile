@@ -64,7 +64,7 @@ RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba init"
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# docker build spacegoing/cudabase:latest .
+# docker build -t spacegoing/cudabase:latest .
 # docker run -it --rm --runtime=nvidia --gpus all spacegoing/cudabase bash
 # Set the working directory
 WORKDIR /root/myCodeLab
