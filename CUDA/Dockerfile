@@ -15,10 +15,9 @@ RUN apt-get update && apt-get upgrade -y && \
     software-properties-common \
     openssh-server
 
-# Add Emacs PPA for Emacs 28 and install
+# Emacs: add PPA for Emacs 28 and install
 RUN add-apt-repository ppa:kelleyk/emacs && apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends emacs28
-
 # Clone spacemacs config
 RUN git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d && \
     mkdir /root/myCodeLab && \
@@ -27,6 +26,8 @@ RUN git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d && \
     ln -s /root/myCodeLab/GitConfig/spacemacs ${HOME}/.spacemacs.d && \
     rm /root/myCodeLab/GitConfig/spacemacs/init.el && \
     ln -s /root/myCodeLab/GitConfig/spacemacs/.spacemacs.clean /root/myCodeLab/GitConfig/spacemacs/init.el
+# Run Spacemacs in daemon mode and then kill it. This will cause it to install layers.
+RUN emacs --daemon && emacsclient -e '(kill-emacs)'
 
 # Install Mambaforge
 RUN wget -q https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh && \
@@ -35,9 +36,6 @@ RUN wget -q https://github.com/conda-forge/miniforge/releases/latest/download/Ma
     rm Mambaforge-Linux-x86_64.sh
 # Set path to conda
 ENV PATH /root/mambaforge/bin:$PATH
-
-# Run Spacemacs in daemon mode and then kill it. This will cause it to install layers.
-RUN emacs --daemon && emacsclient -e '(kill-emacs)'
 
 # Python Env Commands: ray + pytorch1.13
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia && pip install tensorboard"
@@ -60,20 +58,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends is
 # Initialize mamba in your shell.
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba init"
 
-# # Clean up
-# RUN apt-get clean && \
-#     rm -rf /var/lib/apt/lists/*
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /root/myCodeLab
-
-# # Generate SSH keys without a passphrase
-# RUN ssh-keygen -t rsa -b 4096 -C "spacegoing@gmail.com" -N "" -f /root/.ssh/id_rsa
-
-# # Copy environment file to Docker
-# COPY env.yml /tmp/env.yml
-
-# # Create a new environment from the env.yml file
-# RUN mamba env create -f /tmp/env.yml
-
-
