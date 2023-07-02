@@ -11,9 +11,5 @@ RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && \
 # Add /usr/bin to PATH and create it if it doesn't exist
 RUN mkdir -p /root/bin && echo 'export PATH="$PATH:/root/bin"' >> ~/.bashrc
 
-# bash init_container.sh when first login to container
-COPY init_script_v1.sh /root/myCodeLab/init_script_v1.sh
-RUN chmod +x /root/myCodeLab/init_script_v1.sh
-
 # docker build -t spacegoing/rl_cuda:latest .
 WORKDIR /root/myCodeLab

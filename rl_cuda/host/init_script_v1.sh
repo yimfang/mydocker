@@ -20,11 +20,13 @@ ln -s ${ConfigDir}/.bin/docker/drmrf ${HOME}/bin/drmrf
 ln -s ${ConfigDir}/.bin/tmux/tsgs/tsg ${HOME}/bin/tsg
 
 # Create Docker Compose related alias / shortcuts
-echo "alias drmiall=\"docker rmi \$(docker images -f \"dangling=true\" -q)\"" >> ${HOME}/.bashrc
-echo 'alias dcu="docker compose up -d"' >> ${HOME}/.bashrc
-echo 'alias dcd="docker compose down"' >> ${HOME}/.bashrc
-echo 'alias dcps="docker compose ps"' >> ${HOME}/.bashrc
-echo 'alias dclogs="docker compose logs"' >> ${HOME}/.bashrc
+# echo "alias drmiall=\"docker rmi \$(docker images -f \"dangling=true\" -q)\"" >> ${HOME}/.bashrc
+# echo 'alias dcu="docker compose up -d"' >> ${HOME}/.bashrc
+# echo 'alias dcd="docker compose down"' >> ${HOME}/.bashrc
+# echo 'alias dcps="docker compose ps"' >> ${HOME}/.bashrc
+# echo 'alias dclogs="docker compose logs"' >> ${HOME}/.bashrc
+echo 'export LANG=en_US.UTF-8' >> ${HOME}/.bashrc
+
 
 # Source the .bashrc to apply changes
 source ${HOME}/.bashrc

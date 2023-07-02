@@ -17,6 +17,12 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+    shm_size: '20gb'
+    ports:
+      - "6006:6006"
+      - "6007:6007"
+      - "6008:6008"
+      - "8265:8265"
     tty: true
 
   mongodb:
