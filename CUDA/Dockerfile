@@ -41,7 +41,7 @@ ENV PATH /root/mambaforge/bin:$PATH
 # pytorch 1.13: https://pytorch.org/get-started/previous-versions/
 # https://github.com/pytorch/pytorch/wiki/PyTorch-Versions
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia && pip install tensorboard"
-RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && pip install 'ray[all]'"
+RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -c conda-forge 'ray-all'"
 
 # # Setting Properties
 # Configure Git
