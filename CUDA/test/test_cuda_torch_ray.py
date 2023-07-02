@@ -39,7 +39,8 @@ def test_pytorch():
 
 
 def test_ray():
-  print('Testing Ray...')
+  print('#'*30)
+  print('\n\nTesting Ray...')
   ray.init(num_gpus=1)
 
   @ray.remote(num_gpus=1)
