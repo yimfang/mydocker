@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  cuda_rl:
-    image: spacegoing/cuda_rl:latest
+  rl_cuda:
+    image: spacegoing/rl_cuda:latest
     volumes:
       - type: volume
         source: codevolume
