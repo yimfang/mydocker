@@ -38,6 +38,8 @@ RUN wget -q https://github.com/conda-forge/miniforge/releases/latest/download/Ma
 ENV PATH /root/mambaforge/bin:$PATH
 
 # Python Env Commands: ray + pytorch1.13
+# pytorch 1.13: https://pytorch.org/get-started/previous-versions/
+# https://github.com/pytorch/pytorch/wiki/PyTorch-Versions
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia && pip install tensorboard"
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && pip install 'ray[all]'"
 
@@ -62,5 +64,7 @@ RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba init"
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# docker build spacegoing/cudabase:latest .
+# docker run -it --rm --runtime=nvidia --gpus all spacegoing/cudabase bash
 # Set the working directory
 WORKDIR /root/myCodeLab
