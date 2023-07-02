@@ -6,7 +6,7 @@ services:
     volumes:
       - type: volume
         source: codevolume
-        target: /root/myCodeLab
+        target: /root
       - type: bind
         source: ./host
         target: /root/myCodeLab/host

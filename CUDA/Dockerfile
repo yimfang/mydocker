@@ -65,6 +65,6 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # docker build -t spacegoing/cudabase:latest .
-# docker run -it --rm --runtime=nvidia --gpus all spacegoing/cudabase bash
+# docker run --gpus all -it --rm -v $(pwd)/test:/root/myCodeLab/test spacegoing/cudabase:latest bash
 # Set the working directory
 WORKDIR /root/myCodeLab
