@@ -5,7 +5,7 @@ LABEL maintainer="spacegoing@July 2 2023"
 
 # Python packages
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && \
-    mamba install -y tianshou -c conda-forge"
+    mamba install -y gymnasium-all tianshou -c conda-forge"
 
 # Copy your script into the container
 # Add /usr/bin to PATH and create it if it doesn't exist
