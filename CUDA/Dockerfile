@@ -1,5 +1,5 @@
-# Use the nvidia cuda12.2.0 base image with Ubuntu 22.04
-FROM nvidia/cuda:12.2.0-devel-ubuntu22.04
+# Use the nvidia cuda12.2.0 base image with Ubuntu 20.04
+FROM nvidia/cuda:12.2.0-devel-ubuntu20.04
 
 # Set the maintainer: spacegoing/cudabase:latest
 LABEL maintainer="spacegoing@July 2 2023"
@@ -45,9 +45,9 @@ ENV PATH /root/mambaforge/bin:$PATH
 # Python Env Commands: ray + pytorch1.13
 # pytorch 1.13: https://pytorch.org/get-started/previous-versions/
 # https://github.com/pytorch/pytorch/wiki/PyTorch-Versions
+RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y tensorboard"
+RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia"
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -c conda-forge 'ray-all'"
-RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y --freeze-installed pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia"
-RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y --freeze-installed tensorboard"
 
 # # Setting Properties
 # Configure Git
