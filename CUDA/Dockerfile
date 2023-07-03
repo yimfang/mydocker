@@ -47,7 +47,6 @@ ENV PATH /root/mambaforge/bin:$PATH
 # https://github.com/pytorch/pytorch/wiki/PyTorch-Versions
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y tensorboard"
 RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -y pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia"
-RUN /bin/bash -c "source $HOME/mambaforge/etc/profile.d/conda.sh && mamba install -c conda-forge 'ray-all'"
 
 # # Setting Properties
 # Configure Git
@@ -65,6 +64,6 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # docker build -t spacegoing/cudabase:latest .
-# docker run --gpus all -it --rm -v $(pwd)/test:/root/myCodeLab/test spacegoing/cudabase:latest bash
+# docker run --gpus all --shm-size=10.24gb -it --rm -v $(pwd)/test:/root/myCodeLab/test spacegoing/cudabase:latest bash
 # Set the working directory
 WORKDIR /root/myCodeLab

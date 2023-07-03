@@ -49,6 +49,7 @@ def test_ray():
 
   try:
     result = ray.get(f.remote())
+    print('Sum of matrix = ', result)
     print('Ray can perform calculations on the GPU.')
   except RuntimeError as e:
     print('Error performing a calculation on the GPU:', e)
