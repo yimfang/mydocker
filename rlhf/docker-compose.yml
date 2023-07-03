@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  rl_cuda:
+    image: spacegoing/rl_cuda:latest
+    volumes:
+      - type: volume
+        source: codevolume
+        target: /root
+      - type: bind
+        source: ./host
+        target: /root/myCodeLab/host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    shm_size: '20gb'
+    ports:
+      - "6006:6006"
+      - "6007:6007"
+      - "6008:6008"
+      - "8265:8265"
+    tty: true
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - type: volume
+        source: dbvolume
+        target: /data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  codevolume:
+  dbvolume:
